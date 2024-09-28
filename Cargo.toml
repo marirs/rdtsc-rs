@@ -1,0 +1,42 @@
+[package]
+name = "rdtsc-rs"
+description = "RDTSC emulator driver to be used in VM systems."
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/marirs/rdtsc-rs"
+rust-version = "1.76.0"
+readme = "readme.md"
+categories = ["embedded", "no-std"]
+keywords = ["rdtsc", "vm", "hypervisor", "emulator", "driver"]
+
+[package.metadata.wdk]
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = ["supports_64bit_offset"]
+supports_64bit_offset = []
+distorm_light = []
+
+[profile.dev]
+panic = "abort"
+lto = true
+
+[profile.release]
+panic = "abort"
+lto = true
+
+[dependencies]
+winapi = "0.3.9"
+wdk-sys = "0.2.0"
+wdk = "0.2.0"
+wdk-panic = "0.2.0"
+wdk-macros = "0.2.0"
+wdk-alloc = "0.2.0"
+lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
+#iced-x86 = { version = "1.21.0", features = ["no_std"] }
+
+[build-dependencies]
+wdk-build = "0.2.0"
+
